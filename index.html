@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AEDA — Asociación de Economía para el Desarrollo de la Argentina</title>
+<meta name="description" content="Ideas y herramientas para impulsar el desarrollo económico y social. Alianzas y colaboración, investigación y desarrollo, asistencia técnica y formación.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AEDA">
+<meta property="og:title" content="AEDA — Asociación de Economía para el Desarrollo de la Argentina">
+<meta property="og:description" content="Ideas y herramientas para impulsar el desarrollo económico y social.">
+<meta property="og:url" content="https://aeda.org.ar/">
+<meta property="og:image" content="https://aeda.org.ar/assets/og-cover.jpg">
+<meta property="og:locale" content="es_AR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AEDA — Asociación de Economía para el Desarrollo de la Argentina">
+<meta name="twitter:description" content="Ideas y herramientas para impulsar el desarrollo económico y social.">
+<meta name="twitter:image" content="https://aeda.org.ar/assets/og-cover.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/favicon-512.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: #FAFAF8;
+    color: #17222A;
+    font-family: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: "Libre Baskerville", Georgia, "Times New Roman", serif; margin: 0; }
+  p { margin: 0; }
+  a { color: #007FBB; text-decoration: none; }
+  a:hover, a:focus-visible { color: #005C89; text-decoration: underline; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #007FBB; outline-offset: 2px;
+  }
+  img, video { max-width: 100%; display: block; }
+
+  .wrap { width: 100%; max-width: 1440px; margin: 0 auto; background: #FAFAF8; overflow: hidden; }
+
+  /* ---- header ---- */
+  header.site-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 26px 64px; border-bottom: 1px solid #E7E6E1;
+  }
+  header.site-head img { height: 46px; width: auto; }
+  nav.site-nav { display: flex; align-items: center; gap: 36px; }
+  nav.site-nav a { font-size: 14.5px; font-weight: 600; color: #17222A; }
+  nav.site-nav a.cta { font-weight: 700; color: #FFFFFF; background: #007FBB; padding: 11px 22px; border-radius: 3px; }
+  nav.site-nav a.cta:hover { background: #005C89; text-decoration: none; color: #FFFFFF; }
+  .nav-toggle { display: none; }
+
+  /* ---- hero ---- */
+  .hero {
+    position: relative; padding: 150px 64px 140px; overflow: hidden; background: #071019;
+    background-image: url("assets/hero-poster.jpg");
+    background-size: cover; background-position: center;
+  }
+  .hero video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(100deg, #071019 20%, rgba(7,16,25,0.6) 58%, rgba(7,16,25,0.18) 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 760px; }
+  .eyebrow {
+    display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #7FC4E3; margin-bottom: 22px;
+  }
+  .hero h1 { font-size: 52px; line-height: 1.18; font-weight: 700; color: #FFFFFF; text-wrap: balance; }
+
+  /* ---- acciones ---- */
+  .acciones { padding: 8px 64px 100px; }
+  .acciones h2 { font-size: 30px; font-weight: 700; color: #0F1B22; margin-bottom: 52px; text-wrap: balance; }
+  .pilares { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px; }
+  .pilar { display: flex; flex-direction: column; gap: 18px; }
+  .pilar img { width: 140px; height: 140px; object-fit: cover; border-radius: 50%; }
+  .pilar h3 { font-size: 19px; font-weight: 700; color: #0F1B22; }
+  .pilar p { font-size: 15px; line-height: 1.65; color: #4A5459; }
+
+  /* ---- suri ---- */
+  .suri { background: #0A3D5C; padding: 88px 64px; position: relative; overflow: hidden; }
+  .suri::before {
+    content: ""; position: absolute; bottom: -120px; left: -60px; width: 420px; height: 420px;
+    border-radius: 50%; background: #007FBB; opacity: 0.18;
+  }
+  .suri-content { position: relative; max-width: 680px; display: flex; flex-direction: column; gap: 22px; }
+  .suri-content .eyebrow { color: #7FC4E3; }
+  .suri-content img { width: 150px; height: auto; margin: 4px 0 2px; }
+  .suri-content h2 { font-size: 32px; line-height: 1.25; font-weight: 700; color: #FFFFFF; text-wrap: balance; }
+  .suri-content p { font-size: 16px; line-height: 1.7; color: #CFE3EE; }
+  .suri-content em { font-style: italic; color: #FFFFFF; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #FAFAF8; color: #0A3D5C; font-family: "Lato", sans-serif;
+    font-weight: 700; font-size: 15px; letter-spacing: 0.01em;
+    padding: 14px 26px; border-radius: 3px; border: 1px solid #FAFAF8; margin-top: 10px;
+  }
+  .btn-primary:hover { background: transparent; color: #FAFAF8; text-decoration: none; }
+  .btn-primary svg { transition: transform 0.2s ease; }
+  .btn-primary:hover svg { transform: translateX(3px); }
+
+  /* ---- autoridades ---- */
+  .autoridades { padding: 96px 64px; }
+  .autoridades .eyebrow { color: #007FBB; margin-bottom: 14px; }
+  .autoridades h2 { font-size: 30px; font-weight: 700; color: #0F1B22; margin-bottom: 48px; text-wrap: balance; }
+  .autoridades-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; max-width: 760px; }
+  .autoridad { display: flex; align-items: center; gap: 20px; padding: 26px; border: 1px solid #E7E6E1; border-radius: 4px; }
+  .autoridad img { flex: none; width: 58px; height: 58px; border-radius: 50%; object-fit: cover; }
+  .autoridad-info { display: flex; flex-direction: column; gap: 4px; }
+  .autoridad-role { font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8C9599; }
+  .autoridad-name { font-size: 18px; font-weight: 700; font-family: "Libre Baskerville", serif; color: #0F1B22; }
+  .autoridad-info a { font-size: 13.5px; font-weight: 600; }
+
+  /* ---- registros ---- */
+  .registros { padding: 0 64px 96px; }
+  .registros h2 { font-size: 22px; font-weight: 700; color: #0F1B22; margin-bottom: 36px; text-wrap: balance; }
+  .registros-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;
+    padding-top: 32px; border-top: 1px solid #E7E6E1;
+  }
+  .registro-item { display: flex; flex-direction: column; gap: 6px; }
+  .registro-item .label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #007FBB; }
+  .registro-item .value { font-size: 15px; color: #4A5459; }
+  .registro-item .value a { font-weight: 600; }
+
+  /* ---- contacto ---- */
+  .contacto { background: #F1F0EA; padding: 96px 64px; }
+  .contacto-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; max-width: 1120px; margin: 0 auto; }
+  .contacto-intro { display: flex; flex-direction: column; gap: 16px; padding-top: 6px; }
+  .contacto-intro h2 { font-size: 30px; font-weight: 700; color: #0F1B22; text-wrap: balance; }
+  .contacto-intro p { font-size: 15.5px; line-height: 1.7; color: #4A5459; max-width: 40ch; }
+  form.contact-form { display: flex; flex-direction: column; gap: 20px; }
+  form.contact-form label {
+    font-size: 13px; font-weight: 600; color: #4A5459; display: block;
+    margin-bottom: 7px; letter-spacing: 0.01em;
+  }
+  form.contact-form input, form.contact-form textarea {
+    font-family: "Lato", sans-serif; font-size: 15px; color: #17222A;
+    background: #FFFFFF; border: 1px solid #D8DCDD; border-radius: 3px;
+    padding: 13px 14px; width: 100%;
+  }
+  form.contact-form input::placeholder, form.contact-form textarea::placeholder { color: #8C9599; }
+  .submit-btn {
+    font-family: "Lato", sans-serif; font-weight: 700; font-size: 15px; color: #FFFFFF;
+    background: #007FBB; border: none; border-radius: 3px; padding: 14px 28px; cursor: pointer;
+  }
+  .submit-btn:hover { background: #005C89; }
+  .form-status { font-size: 14px; margin-top: -4px; }
+  .form-status.ok { color: #1E8E5A; }
+  .form-status.err { color: #C4402B; }
+
+  /* ---- footer ---- */
+  footer.site-foot {
+    background: #0F1B22; padding: 48px 64px; display: flex; align-items: center;
+    justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  footer.site-foot .brand { font-family: "Libre Baskerville", serif; font-size: 16px; color: #FFFFFF; }
+  footer.site-foot .foot-right { display: flex; align-items: center; gap: 22px; }
+  footer.site-foot .foot-right a { font-size: 13.5px; font-weight: 600; color: #CFE3EE; }
+  footer.site-foot .copyright { font-size: 12.5px; color: #5C6B72; }
+
+  /* ---- responsive ---- */
+  @media (max-width: 900px) {
+    header.site-head { padding: 20px 24px; }
+    nav.site-nav { display: none; }
+    .hero { padding: 110px 24px 90px; }
+    .hero h1 { font-size: 36px; }
+    .acciones, .suri, .autoridades, .registros, .contacto { padding-left: 24px; padding-right: 24px; }
+    .pilares { grid-template-columns: 1fr; gap: 40px; }
+    .autoridades-grid { grid-template-columns: 1fr; }
+    .registros-grid { grid-template-columns: 1fr; gap: 24px; }
+    .contacto-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer.site-foot { padding: 40px 24px; flex-direction: column; align-items: flex-start; gap: 18px; }
+  }
+
+  /* ---- motion system: scroll reveal + hover lift ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal, .hover-lift {
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.35s ease;
+      transform: translateY(calc(var(--reveal-y, 0px) + var(--lift-y, 0px))) scale(var(--lift-scale, 1));
+    }
+    .js-reveal .reveal { --reveal-y: 26px; opacity: 0; }
+    .js-reveal .reveal.is-visible { --reveal-y: 0px; opacity: 1; }
+    .reveal-group > .reveal:nth-child(2) { transition-delay: 0.08s; }
+    .reveal-group > .reveal:nth-child(3) { transition-delay: 0.16s; }
+    .hover-lift:hover, .hover-lift:focus-within {
+      --lift-y: -5px; box-shadow: 0 16px 32px -14px rgba(15, 23, 42, 0.28);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="site-head">
+    <a href="#top"><img src="assets/aeda-logo.png" alt="AEDA — Asociación de Economía para el Desarrollo de la Argentina"></a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#acciones">Acciones</a>
+      <a href="#suri">SURi</a>
+      <a href="#autoridades">Autoridades</a>
+      <a href="#registros">Registros</a>
+      <a href="#contacto" class="cta">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <video autoplay muted loop playsinline poster="assets/hero-poster.jpg" aria-hidden="true">
+      <source src="assets/hero-red-conexiones.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <span class="eyebrow">Asociación de Economía para el Desarrollo de la Argentina</span>
+      <h1>Ideas y herramientas para impulsar el desarrollo económico y social</h1>
+    </div>
+  </section>
+
+  <section class="acciones" id="acciones">
+    <h2 class="reveal">Nuestras acciones y objeto social</h2>
+    <div class="pilares reveal-group">
+
+      <div class="pilar reveal">
+        <picture>
+          <source srcset="assets/pilar-alianzas.avif" type="image/avif">
+          <img src="assets/pilar-alianzas.jpg" alt="" loading="lazy">
+        </picture>
+        <h3>Alianzas y Colaboración</h3>
+        <p>Fomentamos la colaboración entre actores económicos y sociales, promoviendo alianzas estratégicas.</p>
+      </div>
+
+      <div class="pilar reveal">
+        <picture>
+          <source srcset="assets/pilar-investigacion.avif" type="image/avif">
+          <img src="assets/pilar-investigacion.jpg" alt="" loading="lazy">
+        </picture>
+        <h3>Investigación y Desarrollo</h3>
+        <p>Promovemos investigaciones sobre la economía argentina y enriquecemos el debate sobre políticas públicas.</p>
+      </div>
+
+      <div class="pilar reveal">
+        <picture>
+          <source srcset="assets/pilar-asistencia.avif" type="image/avif">
+          <img src="assets/pilar-asistencia.jpg" alt="" loading="lazy">
+        </picture>
+        <h3>Asistencia Técnica y Formación</h3>
+        <p>Brindamos asistencia técnica a instituciones y empresas, ofreciendo capacitación en desarrollo económico.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="suri" id="suri">
+    <div class="suri-content reveal">
+      <span class="eyebrow">Programa estratégico</span>
+      <img src="assets/suri-logo-white.png" alt="SURi — Sur Innovación" loading="lazy">
+      <h2>AEDA impulsa SURi, porque nadie innova solo.</h2>
+      <p>Para fortalecer nuestras acciones y asegurar el cumplimiento de nuestro objeto social, creamos el programa institucional denominado SURi, SUR Innovación.</p>
+      <p>El equipo de SURi guía a instituciones y a empresas para que transformen sus capacidades y logren resultados innovadores.</p>
+      <p>A través del enfoque <em>“Tus ideas con nuestro método”</em> las transformaciones basadas en el conocimiento están impulsando el desarrollo económico y social.</p>
+      <a href="https://www.suri-redes.com/" class="btn-primary">
+        Conocé más sobre SURi
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="autoridades" id="autoridades">
+    <span class="eyebrow">2025 – 2027</span>
+    <h2 class="reveal">Autoridades AEDA</h2>
+    <div class="autoridades-grid reveal-group">
+
+      <div class="autoridad reveal hover-lift">
+        <img src="assets/fernando-peirano.jpg" alt="Fernando Peirano" loading="lazy">
+        <div class="autoridad-info">
+          <span class="autoridad-role">Presidente</span>
+          <span class="autoridad-name">Fernando Peirano</span>
+          <a href="https://www.linkedin.com/in/fernando-peirano-ar/" target="_blank" rel="noopener">Ver perfil en LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="autoridad reveal hover-lift">
+        <img src="assets/pedro-nencini.jpg" alt="Pedro Nencini" loading="lazy">
+        <div class="autoridad-info">
+          <span class="autoridad-role">Tesorero</span>
+          <span class="autoridad-name">Pedro Nencini</span>
+          <a href="https://www.linkedin.com/in/pedro-nencini-55647027/" target="_blank" rel="noopener">Ver perfil en LinkedIn</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="registros" id="registros">
+    <h2 class="reveal">Registros y órganos de control</h2>
+    <div class="registros-grid reveal-group">
+
+      <div class="registro-item reveal">
+        <span class="label">IGJ</span>
+        <span class="value">Inspección General de Justicia — Resolución 511</span>
+      </div>
+
+      <div class="registro-item reveal">
+        <span class="label">ARCA</span>
+        <span class="value">Agencia de Recaudación y Control Aduanero — CUIT 30-71100768-3</span>
+      </div>
+
+      <div class="registro-item reveal">
+        <span class="label">Goodstack (ex Percent)</span>
+        <span class="value">Organización verificada — <a href="https://goodstack.io/verifications" target="_blank" rel="noopener">ver verificación</a></span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contacto" id="contacto">
+    <div class="contacto-grid">
+      <div class="contacto-intro reveal">
+        <h2>Contacto con AEDA</h2>
+        <p>Para consultas, asesoramiento o colaboraciones, por favor completá el formulario de contacto.</p>
+      </div>
+      <form class="contact-form reveal" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="8e03f1fe-c893-4520-b2d1-76b87d7976cb">
+        <input type="hidden" name="subject" value="Nuevo contacto desde aeda.org.ar">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <div>
+          <label for="nombre">Nombre completo del solicitante</label>
+          <input id="nombre" name="name" type="text" placeholder="Tu nombre y apellido" required>
+        </div>
+        <div>
+          <label for="email">Correo electrónico *</label>
+          <input id="email" name="email" type="email" placeholder="tu@correo.com" required>
+        </div>
+        <div>
+          <label for="mensaje">Mensaje *</label>
+          <textarea id="mensaje" name="message" rows="5" placeholder="Contanos en qué podemos ayudarte" required></textarea>
+        </div>
+        <div>
+          <button type="submit" class="submit-btn">Enviar mensaje</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <span class="brand">AEDA</span>
+    <div class="foot-right">
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener">Seguí a AEDA en LinkedIn</a>
+      <span class="copyright">© 2026 AEDA</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/**
+ * Scroll-reveal engine. Progressive enhancement: no-ops without
+ * IntersectionObserver or when the user prefers reduced motion.
+ */
+(function initScrollReveal() {
+  var supportsIO = "IntersectionObserver" in window;
+  var wantsMotion = !window.matchMedia || window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+  if (!supportsIO || !wantsMotion) return;
+  document.documentElement.classList.add("js-reveal");
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+  document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+})();
+
+/**
+ * Contact form: submit via fetch to Web3Forms so we can show inline
+ * success/error state instead of navigating away from the page.
+ */
+(function initContactForm() {
+  var form = document.getElementById("contactForm");
+  var status = document.getElementById("formStatus");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    status.textContent = "Enviando…";
+    status.className = "form-status";
+    var data = new FormData(form);
+    fetch(form.action, { method: "POST", body: data, headers: { Accept: "application/json" } })
+      .then(function (r) { return r.json(); })
+      .then(function (json) {
+        if (json.success) {
+          status.textContent = "¡Gracias! Recibimos tu mensaje y te vamos a responder a la brevedad.";
+          status.className = "form-status ok";
+          form.reset();
+        } else {
+          status.textContent = "No pudimos enviar el mensaje. Probá de nuevo en unos minutos.";
+          status.className = "form-status err";
+        }
+      })
+      .catch(function () {
+        status.textContent = "No pudimos enviar el mensaje. Probá de nuevo en unos minutos.";
+        status.className = "form-status err";
+      });
+  });
+})();
+</script>
+
+</body>
+</html>
