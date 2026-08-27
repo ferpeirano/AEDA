@@ -141,14 +141,14 @@ Plano por defecto. El sitio no usa sombra como recurso decorativo — aparece ú
 
 ## Shapes
 
-Dos lenguajes de forma conviviendo a propósito: todo lo rectangular (botones, inputs, tarjetas, badges de registro) usa un radio chico y consistente de 3-4px — nunca `rounded-lg` genérico ni pill fuera del CTA de nav. Todo lo que sea retrato o marca (fotos de autoridades, íconos de pilares, isologo del hero/contacto) es un círculo perfecto (`border-radius: 50%`). No hay una forma intermedia; el círculo está reservado para "esto es una persona, una marca, o un acento de fondo", el radio chico para "esto es un control o contenedor".
+Dos lenguajes de forma conviviendo a propósito: todo lo rectangular (botones, inputs, tarjetas, badges de registro) usa un radio chico y consistente de 3-4px — nunca `rounded-lg` genérico ni pill fuera del CTA de nav. Todo lo que sea retrato o marca (fotos de autoridades, íconos de pilares, isologo del hero/contacto) es un círculo perfecto (`border-radius: 50%`). No hay una forma intermedia; el círculo está reservado para "esto es una persona, una marca, o un acento de fondo", el radio chico para "esto es un control o contenedor". Única excepción puntual: el botón "Conocé más sobre SURi" usa 8px (ver Components → Buttons) — un radio deliberadamente distinto para ese CTA específico, no una tercera escala general.
 
 ## Components
 
 ### Buttons
-- **Shape:** radio de 3px, nunca completamente cuadrado ni pill (excepto el CTA "Contacto" del nav, que sí es un pill funcional por convención de nav — ver nota abajo sobre su radio real).
+- **Shape:** radio de 3px en botones de UI general (nav CTA, submit), nunca completamente cuadrado. El CTA "Conocé más sobre SURi" es la única excepción documentada, con radio de 8px (ver abajo) — no generalizar ese radio a otros botones sin decisión explícita.
 - **Primary (texto blanco sobre acento):** fondo `--color-brand-dark` en reposo, hover a `--color-navy` (ver Corrección de contraste — no usar `--color-brand` como fondo de texto blanco).
-- **Outline sobre navy:** fondo `--color-bg` (papel), texto navy, hover invierte a fondo transparente + texto papel — usado para "Conocé más sobre SURi" sobre el navy.
+- **CTA sobre navy — "Conocé más sobre SURi" (rediseñado 2026-08-27):** fondo sólido `--color-brand-light`, texto `--color-navy`, radio 8px, sin borde, padding 16px 32px. Hover profundiza a fondo `--color-brand-dark` + texto blanco (7.26:1, misma pareja de contraste que el resto de los botones de acento) — reemplaza la versión anterior (fondo papel/texto navy que se invertía a transparente en hover), que el usuario reportó como poco atractiva y con un hover que "hacía desaparecer" el botón. Es la única superficie del sitio con radio 8px; no reutilizar ese valor en otro componente sin registrarlo acá primero.
 - **Hover / Focus:** el ícono de flecha del botón se desplaza `translateX(3px)` en 0.2s, gateado detrás de `prefers-reduced-motion: no-preference`.
 
 ### Corrección de contraste (heredada, 2026-08-27)
