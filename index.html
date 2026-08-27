@@ -26,6 +26,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/hero-poster.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -51,8 +52,10 @@
 
   /* ---- header ---- */
   header.site-head {
+    position: sticky; top: 0; z-index: 10;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 26px 64px; border-bottom: 1px solid #E7E6E1;
+    padding: 20px 64px; border-bottom: 1px solid #E7E6E1;
+    background: #FAFAF8;
   }
   header.site-head img { height: 46px; width: auto; }
   nav.site-nav { display: flex; align-items: center; gap: 36px; }
@@ -114,7 +117,7 @@
 
   /* ---- autoridades ---- */
   .autoridades { padding: 96px 64px; }
-  .autoridades .eyebrow { color: #007FBB; margin-bottom: 14px; }
+  .autoridades .eyebrow { color: #005C89; margin-bottom: 14px; }
   .autoridades h2 { font-size: 30px; font-weight: 700; color: #0F1B22; margin-bottom: 48px; text-wrap: balance; }
   .autoridades-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; max-width: 760px; }
   .autoridad { display: flex; align-items: center; gap: 20px; padding: 26px; border: 1px solid #E7E6E1; border-radius: 4px; }
@@ -170,7 +173,7 @@
   footer.site-foot .brand { font-family: "Libre Baskerville", serif; font-size: 16px; color: #FFFFFF; }
   footer.site-foot .foot-right { display: flex; align-items: center; gap: 22px; }
   footer.site-foot .foot-right a { font-size: 13.5px; font-weight: 600; color: #CFE3EE; }
-  footer.site-foot .copyright { font-size: 12.5px; color: #5C6B72; }
+  footer.site-foot .copyright { font-size: 12.5px; color: #92A3AB; }
 
   /* ---- responsive ---- */
   @media (max-width: 900px) {
@@ -199,7 +202,8 @@
     .reveal-group > .reveal:nth-child(2) { transition-delay: 0.08s; }
     .reveal-group > .reveal:nth-child(3) { transition-delay: 0.16s; }
     .hover-lift:hover, .hover-lift:focus-within {
-      --lift-y: -5px; box-shadow: 0 16px 32px -14px rgba(15, 23, 42, 0.28);
+      --lift-y: -5px; --lift-scale: 1.012;
+      box-shadow: 0 16px 32px -14px rgba(15, 23, 42, 0.28);
     }
   }
 </style>
@@ -209,7 +213,7 @@
 <div class="wrap">
 
   <header class="site-head">
-    <a href="#top"><img src="assets/aeda-logo.png" alt="AEDA — Asociación de Economía para el Desarrollo de la Argentina"></a>
+    <a href="#top"><img src="assets/aeda-logo.png" alt="AEDA — Asociación de Economía para el Desarrollo de la Argentina" width="46" height="46"></a>
     <nav class="site-nav" aria-label="Navegación principal">
       <a href="#acciones">Acciones</a>
       <a href="#suri">SURi</a>
@@ -219,6 +223,7 @@
     </nav>
   </header>
 
+  <main>
   <section class="hero" id="top">
     <video autoplay muted loop playsinline poster="assets/hero-poster.jpg" aria-hidden="true">
       <source src="assets/hero-red-conexiones.mp4" type="video/mp4">
@@ -236,7 +241,7 @@
       <div class="pilar reveal">
         <picture>
           <source srcset="assets/pilar-alianzas.avif" type="image/avif">
-          <img src="assets/pilar-alianzas.jpg" alt="" loading="lazy">
+          <img src="assets/pilar-alianzas.jpg" alt="" width="140" height="140" loading="lazy">
         </picture>
         <h3>Alianzas y Colaboración</h3>
         <p>Fomentamos la colaboración entre actores económicos y sociales, promoviendo alianzas estratégicas.</p>
@@ -245,7 +250,7 @@
       <div class="pilar reveal">
         <picture>
           <source srcset="assets/pilar-investigacion.avif" type="image/avif">
-          <img src="assets/pilar-investigacion.jpg" alt="" loading="lazy">
+          <img src="assets/pilar-investigacion.jpg" alt="" width="140" height="140" loading="lazy">
         </picture>
         <h3>Investigación y Desarrollo</h3>
         <p>Promovemos investigaciones sobre la economía argentina y enriquecemos el debate sobre políticas públicas.</p>
@@ -254,7 +259,7 @@
       <div class="pilar reveal">
         <picture>
           <source srcset="assets/pilar-asistencia.avif" type="image/avif">
-          <img src="assets/pilar-asistencia.jpg" alt="" loading="lazy">
+          <img src="assets/pilar-asistencia.jpg" alt="" width="140" height="140" loading="lazy">
         </picture>
         <h3>Asistencia Técnica y Formación</h3>
         <p>Brindamos asistencia técnica a instituciones y empresas, ofreciendo capacitación en desarrollo económico.</p>
@@ -266,7 +271,7 @@
   <section class="suri" id="suri">
     <div class="suri-content reveal">
       <span class="eyebrow">Programa estratégico</span>
-      <img src="assets/suri-logo-white.png" alt="SURi — Sur Innovación" loading="lazy">
+      <img src="assets/suri-logo-white.png" alt="SURi — Sur Innovación" width="150" height="90" loading="lazy">
       <h2>AEDA impulsa SURi, porque nadie innova solo.</h2>
       <p>Para fortalecer nuestras acciones y asegurar el cumplimiento de nuestro objeto social, creamos el programa institucional denominado SURi, SUR Innovación.</p>
       <p>El equipo de SURi guía a instituciones y a empresas para que transformen sus capacidades y logren resultados innovadores.</p>
@@ -284,7 +289,7 @@
     <div class="autoridades-grid reveal-group">
 
       <div class="autoridad reveal hover-lift">
-        <img src="assets/fernando-peirano.jpg" alt="Fernando Peirano" loading="lazy">
+        <img src="assets/fernando-peirano.jpg" alt="Fernando Peirano" width="58" height="58" loading="lazy">
         <div class="autoridad-info">
           <span class="autoridad-role">Presidente</span>
           <span class="autoridad-name">Fernando Peirano</span>
@@ -293,7 +298,7 @@
       </div>
 
       <div class="autoridad reveal hover-lift">
-        <img src="assets/pedro-nencini.jpg" alt="Pedro Nencini" loading="lazy">
+        <img src="assets/pedro-nencini.jpg" alt="Pedro Nencini" width="58" height="58" loading="lazy">
         <div class="autoridad-info">
           <span class="autoridad-role">Tesorero</span>
           <span class="autoridad-name">Pedro Nencini</span>
@@ -355,6 +360,7 @@
       </form>
     </div>
   </section>
+  </main>
 
   <footer class="site-foot">
     <span class="brand">AEDA</span>
