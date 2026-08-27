@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-27T00:00:00Z",
+  "title": "Design System: AEDA",
+  "extensions": {
+    "colorMeta": {
+      "brand": { "role": "primary", "displayName": "Azul Confianza Institucional", "canonical": "#007FBB", "tonalRamp": ["#00344C", "#005C87", "#0083C1", "#00ABFB", "#37BFFF", "#71D1FF", "#ABE4FF", "#E5F7FF"] },
+      "navy": { "role": "secondary", "displayName": "Navy SURi", "canonical": "#0A3D5C", "tonalRamp": ["#082E45", "#0D517A", "#1373AE", "#1996E3", "#4AAEEB", "#7FC6F1", "#B3DDF7", "#E8F5FD"] },
+      "ink": { "role": "neutral", "displayName": "Tinta Institucional", "canonical": "#17222A", "tonalRamp": ["#1B2831", "#304757", "#44657D", "#5983A2", "#7E9FB8", "#A3BBCD", "#C9D7E1", "#EFF3F6"] },
+      "bg": { "role": "neutral", "displayName": "Papel Institucional", "canonical": "#FAFAF8" },
+      "success": { "role": "semantic-success", "displayName": "Verde Confirmación", "canonical": "#1E8E5A" },
+      "error": { "role": "semantic-error", "displayName": "Rojo Error", "canonical": "#C4402B" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Libre Baskerville", "purpose": "Títulos únicamente — hero, encabezados de sección, nombre de autoridad. Nunca en cuerpo de texto ni controles." },
+      "body": { "displayName": "Lato", "purpose": "Todo el cuerpo de texto, labels, botones y formularios." }
+    },
+    "shadows": [
+      { "name": "sello-flotante", "value": "0 6px 20px -8px rgba(15, 23, 42, 0.18)", "purpose": "El badge circular de la sección de Contacto — único elemento con sombra en reposo." },
+      { "name": "hover-lift", "value": "0 16px 32px -14px rgba(15, 23, 42, 0.28)", "purpose": "Tarjetas de Autoridades al pasar el mouse/foco, junto con translateY(-5px) scale(1.012)." }
+    ],
+    "motion": [
+      { "name": "ease-reveal", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Scroll-reveal y hover-lift; siempre detrás de prefers-reduced-motion: no-preference." },
+      { "name": "duration-reveal-opacity", "value": "0.6s", "purpose": "Fade-in del scroll-reveal." },
+      { "name": "duration-reveal-transform", "value": "0.45s", "purpose": "Slide-up del scroll-reveal y el hover-lift." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA de navegación (\"Contacto\") — pill de color sobre fondo claro.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#contacto\">Contacto</a>",
+      "css": ".ds-btn-primary { display: inline-flex; font-weight: 700; font-size: 14.5px; color: #FFFFFF; background: #007FBB; padding: 11px 22px; border-radius: 3px; font-family: Lato, sans-serif; transition: background 0.2s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #005C89; } .ds-btn-primary:focus-visible { outline: 2px solid #007FBB; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button on Navy",
+      "kind": "button",
+      "refersTo": "button-outline-on-navy",
+      "description": "Botón sobre fondo navy (sección SURi) — fondo papel, se invierte en hover.",
+      "html": "<a class=\"ds-btn-outline-navy\" href=\"#\">Conocé más sobre SURi<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"></path><path d=\"M13 6l6 6-6 6\"></path></svg></a>",
+      "css": ".ds-btn-outline-navy { display: inline-flex; align-items: center; gap: 10px; background: #FAFAF8; color: #0A3D5C; font-family: Lato, sans-serif; font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 3px; border: 1px solid #FAFAF8; } .ds-btn-outline-navy:hover, .ds-btn-outline-navy:focus-visible { background: transparent; color: #FAFAF8; } .ds-btn-outline-navy svg { transition: transform 0.2s ease; } .ds-btn-outline-navy:hover svg { transform: translateX(3px); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Campo del formulario de contacto.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Tu nombre y apellido\">",
+      "css": ".ds-input { font-family: Lato, sans-serif; font-size: 15px; color: #17222A; background: #FFFFFF; border: 1px solid #D8DCDD; border-radius: 3px; padding: 13px 14px; width: 100%; } .ds-input::placeholder { color: #8C9599; } .ds-input:focus-visible { outline: 2px solid #007FBB; outline-offset: 2px; }"
+    },
+    {
+      "name": "Authority Card",
+      "kind": "card",
+      "refersTo": "card-autoridad",
+      "description": "Tarjeta de autoridad con foto circular, rol y nombre — ejemplo del hover-lift.",
+      "html": "<div class=\"ds-card-autoridad\"><img class=\"ds-card-photo\" src=\"foto.jpg\" alt=\"\"><div><span class=\"ds-card-role\">Presidente</span><br><strong class=\"ds-card-name\">Nombre Apellido</strong></div></div>",
+      "css": ".ds-card-autoridad { display: flex; align-items: center; gap: 20px; padding: 26px; border: 1px solid #E7E6E1; border-radius: 4px; transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease; } .ds-card-autoridad:hover, .ds-card-autoridad:focus-within { transform: translateY(-5px) scale(1.012); box-shadow: 0 16px 32px -14px rgba(15,23,42,0.28); } .ds-card-photo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; } .ds-card-role { font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #667079; } .ds-card-name { font-family: 'Libre Baskerville', serif; font-size: 18px; color: #0F1B22; }"
+    },
+    {
+      "name": "Mobile Navigation Panel",
+      "kind": "nav",
+      "refersTo": "mobile-nav",
+      "description": "Panel de navegación mobile — se despliega dentro del mismo header sticky, links a ancho completo.",
+      "html": "<nav class=\"ds-mobile-nav\"><a href=\"#\">Acciones</a><a href=\"#\">SURi</a><a class=\"ds-cta\" href=\"#\">Contacto</a></nav>",
+      "css": ".ds-mobile-nav { display: flex; flex-direction: column; border-top: 1px solid #E7E6E1; padding: 4px 24px 12px; background: #FAFAF8; } .ds-mobile-nav a { padding: 15px 2px; font-family: Lato, sans-serif; font-size: 15.5px; font-weight: 600; color: #17222A; border-bottom: 1px solid #E7E6E1; } .ds-mobile-nav a:last-child { border-bottom: none; } .ds-mobile-nav a.ds-cta { color: #007FBB; }"
+    },
+    {
+      "name": "Circular Seal",
+      "kind": "custom",
+      "refersTo": "contacto-seal",
+      "description": "El componente de firma del sitio: círculo blanco con el isologo, único elemento con sombra en reposo.",
+      "html": "<span class=\"ds-seal\"><img src=\"aeda-mark.png\" alt=\"AEDA\" width=\"72\" height=\"52\"></span>",
+      "css": ".ds-seal { display: flex; align-items: center; justify-content: center; width: 108px; height: 108px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 6px 20px -8px rgba(15, 23, 42, 0.18); } .ds-seal img { width: 72px; height: auto; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Sello Institucional",
+    "overview": "AEDA es una asociación civil de política económica, no una startup — el sistema visual tiene que leerse como una institución acreditada, no como un producto SaaS. Todo el diseño gira alrededor de una idea central: el isologo de AEDA (la bandera azul recortada detrás de la \"e\") funciona como un sello, y ese mismo gesto —una marca circular con peso— se repite deliberadamente en cada foto de persona, cada ícono de pilar, y el badge de la sección de contacto. No es decoración: es la firma visual del sitio. La paleta es contenida a propósito: un fondo papel casi blanco, un azul de marca que aparece con moderación, y un navy oscuro reservado para un único quiebre visual (la sección SURi). La tipografía combina un serif editorial (Libre Baskerville) para títulos con un sans-serif neutro (Lato) para el cuerpo — la misma combinación que ya usaba el sitio anterior de AEDA, mantenida a propósito por continuidad de marca, no por default.",
+    "keyCharacteristics": [
+      "Paleta contenida: un azul de marca, un navy de quiebre, neutros papel/tinta",
+      "El círculo como firma visual recurrente (logos, fotos, sellos)",
+      "Serif editorial + sans neutro, sin una tercera familia tipográfica",
+      "Radios chicos y consistentes (3px) en todo lo rectangular",
+      "Plano por defecto; la sombra aparece solo como respuesta a estado"
+    ],
+    "rules": [
+      { "name": "La Regla del Acento Único", "body": "El azul de marca aparece en un solo elemento interactivo por vista. Nunca dos acentos compitiendo en la misma sección.", "section": "colors" },
+      { "name": "La Regla Serif-Solo-En-Títulos", "body": "Libre Baskerville nunca aparece en párrafos de cuerpo ni en controles de formulario — el serif es exclusivamente para jerarquía.", "section": "typography" },
+      { "name": "La Regla Plano-Por-Defecto", "body": "Ninguna superficie tiene sombra en reposo salvo el sello de contacto. La sombra es siempre una respuesta a interacción, nunca un adorno permanente.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar var(--color-*) para cualquier color nuevo — nunca un hex literal nuevo sin agregarlo primero al :root.",
+      "Do mantener el círculo (border-radius: 50%) reservado para fotos y marcas; el radio de 3px para todo lo demás.",
+      "Do gatear cualquier animación/transición nueva detrás de @media (prefers-reduced-motion: no-preference).",
+      "Do mantener Libre Baskerville exclusivamente en títulos; el cuerpo siempre en Lato."
+    ],
+    "donts": [
+      "Don't agregar una sombra decorativa a un elemento en reposo.",
+      "Don't introducir una tercera familia tipográfica.",
+      "Don't usar el azul de marca en más de un elemento interactivo por vista.",
+      "Don't cargar el video del hero fuera de la condición actual (desktop + sin prefers-reduced-motion)."
+    ]
+  }
+}
