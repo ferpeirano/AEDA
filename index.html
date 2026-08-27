@@ -54,16 +54,36 @@
   /* ---- header ---- */
   header.site-head {
     position: sticky; top: 0; z-index: 10;
+    background: #FAFAF8; border-bottom: 1px solid #E7E6E1;
+  }
+  .site-head-bar {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 64px; border-bottom: 1px solid #E7E6E1;
-    background: #FAFAF8;
+    padding: 20px 64px;
   }
   header.site-head img { height: 46px; width: auto; }
   nav.site-nav { display: flex; align-items: center; gap: 36px; }
   nav.site-nav a { font-size: 14.5px; font-weight: 600; color: #17222A; }
   nav.site-nav a.cta { font-weight: 700; color: #FFFFFF; background: #007FBB; padding: 11px 22px; border-radius: 3px; }
   nav.site-nav a.cta:hover { background: #005C89; text-decoration: none; color: #FFFFFF; }
-  .nav-toggle { display: none; }
+  .nav-toggle {
+    display: none;
+    align-items: center; justify-content: center;
+    width: 44px; height: 44px; margin: -8px; padding: 0;
+    background: transparent; border: none; color: #17222A; cursor: pointer;
+  }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid #E7E6E1;
+    padding: 4px 24px 12px;
+  }
+  .mobile-nav a {
+    padding: 15px 2px; font-size: 15.5px; font-weight: 600; color: #17222A;
+    border-bottom: 1px solid #E7E6E1;
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav.cta { color: #007FBB; }
+  header.site-head.is-open .mobile-nav { display: flex; }
 
   /* ---- hero ---- */
   .hero {
@@ -124,7 +144,7 @@
   .autoridad { display: flex; align-items: center; gap: 20px; padding: 26px; border: 1px solid #E7E6E1; border-radius: 4px; }
   .autoridad img { flex: none; width: 58px; height: 58px; border-radius: 50%; object-fit: cover; }
   .autoridad-info { display: flex; flex-direction: column; gap: 4px; }
-  .autoridad-role { font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8C9599; }
+  .autoridad-role { font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #667079; }
   .autoridad-name { font-size: 18px; font-weight: 700; font-family: "Libre Baskerville", serif; color: #0F1B22; }
   .autoridad-info a { font-size: 13.5px; font-weight: 600; }
 
@@ -178,8 +198,9 @@
 
   /* ---- responsive ---- */
   @media (max-width: 900px) {
-    header.site-head { padding: 20px 24px; }
+    .site-head-bar { padding: 20px 24px; }
     nav.site-nav { display: none; }
+    .nav-toggle { display: inline-flex; }
     .hero { padding: 110px 24px 90px; }
     .hero h1 { font-size: 36px; }
     .acciones, .suri, .autoridades, .registros, .contacto { padding-left: 24px; padding-right: 24px; }
@@ -213,9 +234,23 @@
 
 <div class="wrap">
 
-  <header class="site-head">
-    <a href="#top"><img src="assets/aeda-logo.png" alt="AEDA — Asociación de Economía para el Desarrollo de la Argentina" width="46" height="46"></a>
-    <nav class="site-nav" aria-label="Navegación principal">
+  <header class="site-head" id="siteHead">
+    <div class="site-head-bar">
+      <a href="#top"><img src="assets/aeda-logo.png" alt="AEDA — Asociación de Economía para el Desarrollo de la Argentina" width="46" height="46"></a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="#acciones">Acciones</a>
+        <a href="#suri">SURi</a>
+        <a href="#autoridades">Autoridades</a>
+        <a href="#registros">Registros</a>
+        <a href="#contacto" class="cta">Contacto</a>
+      </nav>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Abrir menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
       <a href="#acciones">Acciones</a>
       <a href="#suri">SURi</a>
       <a href="#autoridades">Autoridades</a>
@@ -226,9 +261,6 @@
 
   <main>
   <section class="hero" id="top">
-    <video autoplay muted loop playsinline poster="assets/hero-poster.jpg" aria-hidden="true">
-      <source src="assets/hero-red-conexiones.mp4" type="video/mp4">
-    </video>
     <div class="hero-content">
       <span class="eyebrow">Asociación de Economía para el Desarrollo de la Argentina</span>
       <h1>Ideas y herramientas para impulsar el desarrollo económico y social</h1>
@@ -343,7 +375,7 @@
         <input type="hidden" name="subject" value="Nuevo contacto desde aeda.org.ar">
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div>
-          <label for="nombre">Nombre completo del solicitante</label>
+          <label for="nombre">Nombre completo del solicitante *</label>
           <input id="nombre" name="name" type="text" placeholder="Tu nombre y apellido" required>
         </div>
         <div>
@@ -366,7 +398,7 @@
   <footer class="site-foot">
     <span class="brand">AEDA</span>
     <div class="foot-right">
-      <a href="https://www.linkedin.com" target="_blank" rel="noopener">Seguí a AEDA en LinkedIn</a>
+      <a href="https://www.linkedin.com/company/104715012" target="_blank" rel="noopener">Seguí a AEDA en LinkedIn</a>
       <span class="copyright">© 2026 AEDA</span>
     </div>
   </footer>
@@ -374,6 +406,65 @@
 </div>
 
 <script>
+/**
+ * Mobile nav: toggles the collapsible panel from the hamburger button,
+ * closes on link click (so navigating actually dismisses the menu) and
+ * on Escape. The panel is real markup, not the dead .nav-toggle rule
+ * this replaced — it works with or without JS enabled up to the toggle
+ * itself (links are always in the DOM, just visually collapsed by CSS).
+ */
+(function initMobileNav() {
+  var header = document.getElementById("siteHead");
+  var toggle = document.getElementById("navToggle");
+  var panel = document.getElementById("mobileNav");
+  if (!header || !toggle || !panel) return;
+
+  function close() {
+    header.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+  function open() {
+    header.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+  }
+
+  toggle.addEventListener("click", function () {
+    if (header.classList.contains("is-open")) close(); else open();
+  });
+  panel.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", close);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") close();
+  });
+})();
+
+/**
+ * Hero video: only ever requested on wide viewports with no reduced-motion
+ * preference. Mobile and reduced-motion users get the static CSS
+ * background-image (assets/hero-poster.jpg) and nothing else loads —
+ * no ~2.9MB fetch, no motion outside what the user asked for.
+ */
+(function initHeroVideo() {
+  var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isNarrow = window.matchMedia && window.matchMedia("(max-width: 900px)").matches;
+  if (prefersReduced || isNarrow) return;
+  var hero = document.getElementById("top");
+  if (!hero) return;
+  var video = document.createElement("video");
+  video.autoplay = true;
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.setAttribute("poster", "assets/hero-poster.jpg");
+  video.setAttribute("aria-hidden", "true");
+  var source = document.createElement("source");
+  source.src = "assets/hero-red-conexiones.mp4";
+  source.type = "video/mp4";
+  video.appendChild(source);
+  hero.insertBefore(video, hero.firstChild);
+})();
+
 /**
  * Scroll-reveal engine. Progressive enhancement: no-ops without
  * IntersectionObserver or when the user prefers reduced motion.
