@@ -75,7 +75,8 @@
   }
   img, video { max-width: 100%; display: block; }
 
-  .wrap { width: 100%; max-width: 1440px; margin: 0 auto; background: var(--color-bg); overflow: hidden; }
+  .wrap { width: 100%; background: var(--color-bg); overflow: hidden; }
+  .contain { max-width: 1440px; margin-left: auto; margin-right: auto; }
 
   /* ---- skip link ---- */
   .skip-link {
@@ -235,8 +236,9 @@
   .form-status.err { color: var(--color-error); }
 
   /* ---- footer ---- */
-  footer.site-foot {
-    background: var(--color-ink-strong); padding: 48px 64px; display: flex; align-items: center;
+  footer.site-foot { background: var(--color-ink-strong); padding: 48px 64px; }
+  .foot-inner {
+    display: flex; align-items: center;
     justify-content: space-between; gap: 24px; flex-wrap: wrap;
   }
   footer.site-foot .brand { font-family: "Libre Baskerville", serif; font-size: 16px; color: var(--color-white); }
@@ -256,7 +258,8 @@
     .autoridades-grid { grid-template-columns: 1fr; }
     .registros-grid { grid-template-columns: 1fr; gap: 24px; }
     .contacto-grid { grid-template-columns: 1fr; gap: 40px; }
-    footer.site-foot { padding: 40px 24px; flex-direction: column; align-items: flex-start; gap: 18px; }
+    footer.site-foot { padding: 40px 24px; }
+    .foot-inner { flex-direction: column; align-items: flex-start; gap: 18px; }
   }
 
   /* ---- motion system: scroll reveal + hover lift ---- */
@@ -284,7 +287,7 @@
 <div class="wrap">
 
   <header class="site-head" id="siteHead">
-    <div class="site-head-bar">
+    <div class="site-head-bar contain">
       <a href="#top"><img src="assets/aeda-logo.png" alt="AEDA — Asociación de Economía para el Desarrollo de la Argentina" width="46" height="46"></a>
       <nav class="site-nav" aria-label="Navegación principal">
         <a href="#acciones">Acciones</a>
@@ -323,7 +326,7 @@
     <span class="deco-circle" style="left:18%; width:560px; height:560px; background:var(--color-navy); opacity:0.10;"></span>
   </div>
 
-  <section class="acciones" id="acciones">
+  <section class="acciones contain" id="acciones">
     <h2 class="reveal">Nuestras acciones y objeto social</h2>
     <div class="pilares reveal-group">
 
@@ -380,7 +383,7 @@
     <span class="deco-circle" style="left:22%; width:520px; height:520px; background:var(--color-brand-light); opacity:0.14;"></span>
   </div>
 
-  <section class="autoridades" id="autoridades">
+  <section class="autoridades contain" id="autoridades">
     <span class="eyebrow">2025 – 2027</span>
     <h2 class="reveal">Autoridades AEDA</h2>
     <div class="autoridades-grid reveal-group">
@@ -406,7 +409,7 @@
     </div>
   </section>
 
-  <section class="registros" id="registros">
+  <section class="registros contain" id="registros">
     <h2 class="reveal">Registros y órganos de control</h2>
     <div class="registros-grid reveal-group">
 
@@ -471,10 +474,12 @@
   </div>
 
   <footer class="site-foot">
-    <span class="brand">AEDA</span>
-    <div class="foot-right">
-      <a href="https://www.linkedin.com/company/104715012" target="_blank" rel="noopener">Seguí a AEDA en LinkedIn</a>
-      <span class="copyright">© 2026 AEDA</span>
+    <div class="foot-inner contain">
+      <span class="brand">AEDA</span>
+      <div class="foot-right">
+        <a href="https://www.linkedin.com/company/104715012" target="_blank" rel="noopener">Seguí a AEDA en LinkedIn</a>
+        <span class="copyright">© 2026 AEDA</span>
+      </div>
     </div>
   </footer>
 
