@@ -39,12 +39,12 @@ spacing:
   card-gap: "28px"
 components:
   button-primary:
-    backgroundColor: "{colors.brand}"
+    backgroundColor: "{colors.brand-dark}"
     textColor: "{colors.white}"
     rounded: "{rounded.sm}"
     padding: "11px 22px"
   button-primary-hover:
-    backgroundColor: "{colors.brand-dark}"
+    backgroundColor: "{colors.navy}"
   button-outline-on-navy:
     backgroundColor: "{colors.bg}"
     textColor: "{colors.navy}"
@@ -62,22 +62,25 @@ AEDA es una asociación civil de política económica, no una startup — el sis
 
 La paleta es contenida a propósito: un fondo papel casi blanco, un azul de marca que aparece con moderación, y un navy oscuro reservado para un único quiebre visual (la sección SURi). La tipografía combina un serif editorial (Libre Baskerville) para títulos con un sans-serif neutro (Lato) para el cuerpo — la misma combinación que ya usaba el sitio anterior de AEDA, mantenida a propósito por continuidad de marca, no por default.
 
-Rechazos confirmados: sin gradientes, sin sombras decorativas fuera de los dos casos ya establecidos (el sello circular de contacto y el hover-lift de las tarjetas), sin más de un acento de color por pantalla.
+Rechazos confirmados: sin gradientes, sin glassmorphism, sin sombras decorativas fuera de los dos casos ya establecidos (el sello circular de contacto y el hover-lift de las tarjetas), sin más de un acento de color por pantalla.
 
 **Key Characteristics:**
 - Paleta contenida: un azul de marca, un navy de quiebre, neutros papel/tinta
-- El círculo como firma visual recurrente (logos, fotos, sellos)
+- El círculo como firma visual recurrente (logos, fotos, sellos, y ahora también como acento de fondo entre secciones)
 - Serif editorial + sans neutro, sin una tercera familia tipográfica
-- Radios chicos y consistentes (3px) en todo lo rectangular
+- Radios chicos y consistentes (3px botones/inputs, 4px tarjetas) en todo lo rectangular
 - Plano por defecto; la sombra aparece solo como respuesta a estado
+
+### Nota de reversión (2026-08-27)
+El sitio pasó brevemente por un pivot "orgánico" (glassmorphism, blobs difuminados animados, curvas SVG entre secciones, radios grandes tipo pill) que se revirtió el mismo día tras recibir un handoff de diseño de alta fidelidad (`design_handoff_landing_aeda/`) que confirmaba la dirección sobria/institucional original como la vigente. Este documento y `index.html` reflejan esa reversión: **el lenguaje "plano" descrito abajo es el estado real del sitio**, no un borrador histórico. La única herencia que sí se conservó del pivot orgánico fue la corrección de contraste de los botones (ver Components → Buttons) y la incorporación de acentos circulares de fondo entre secciones (ver Layout), ambos compatibles con el lenguaje plano.
 
 ## Colors
 
 Paleta contenida y con propósito: un acento, un quiebre navy, y neutros papel/tinta que hacen todo el trabajo pesado de jerarquía.
 
 ### Primary
-- **Azul Confianza Institucional** (#007FBB): el acento de marca — CTA "Contacto", links, la bandera del isologo, el borde de foco. Aparece con moderación; nunca cubre una sección entera.
-- **Azul Confianza (hover)** (#005C89): estado hover/activo del acento — siempre más oscuro, nunca un color distinto.
+- **Azul Confianza Institucional** (#007FBB): el acento de marca — links, la bandera del isologo, el borde de foco, las etiquetas de registros. Aparece con moderación; nunca cubre una sección entera.
+- **Azul Confianza (hover)** (#005C89): estado de reposo de los botones de texto blanco (ver Corrección de contraste) y estado hover/activo del acento en general — siempre más oscuro, nunca un color distinto.
 - **Celeste sobre Navy** (#7FC4E3): la misma familia de azul, aclarada para funcionar como eyebrow/etiqueta sobre el fondo navy oscuro (hero, sección SURi).
 
 ### Secondary
@@ -119,84 +122,68 @@ Paleta contenida y con propósito: un acento, un quiebre navy, y neutros papel/t
 
 ## Layout
 
-**(2026-08-27 — pivot a lenguaje orgánico, ver nota al final de esta sección).** Página de una sola sección larga (sin routing), contenida en un `.wrap` de `max-width: 1440px` centrado. Padding vertical de sección generoso en desktop (88-150px) que se comprime a 24px horizontal en mobile (`≤900px`, único breakpoint del sitio). El header es sticky (`top: 0`) en todo momento, incluido el panel de navegación mobile que vive dentro del mismo elemento sticky.
+Página de una sola sección larga (sin routing), contenida en un `.wrap` de `max-width: 1440px` centrado, con `overflow: hidden` (necesario para recortar los acentos circulares de fondo que asoman por los bordes — ver abajo). Padding vertical de sección generoso en desktop (88-150px) que se comprime a 24px horizontal en mobile (`≤900px`, único breakpoint del sitio). Grillas de 3 columnas (pilares, registros) y 2 columnas (autoridades) colapsan a 1 columna en mobile. El header es sticky (`top: 0`) en todo momento, incluido el panel de navegación mobile que vive dentro del mismo elemento sticky. Las secciones siguen cortándose en ángulo recto entre sí — no hay curvas SVG ni transiciones onduladas.
 
-Las secciones ya no se cortan en ángulo recto entre sí: cada transición de sección usa un `.wave-divider` (SVG de curva orgánica, `fill` igual al color de la sección siguiente) en vez de un borde de 90°. Acciones, SURi, Autoridades y Registros viven dentro de un `.organic-flow` (contenedor `position: relative`) con 2-3 `.blob` (círculos `filter: blur()`, opacidad baja, tonos de marca/navy, animación de flotación lenta gateada por `prefers-reduced-motion`) que conectan visualmente esas secciones. Las grillas dejaron de ser simétricas a propósito: pilares usa 3 columnas de ancho desigual con stagger vertical (`margin-top` alternado), autoridades escalona su segunda tarjeta, y registros pasó de grid+`border-top` a chips en `flex-wrap`.
+**Acentos circulares de fondo (`.deco-track` / `.deco-circle`, agregado 2026-08-27):** cinco círculos planos, sin blur ni animación, de 380-560px de diámetro, en `--color-brand`, `--color-brand-light` o `--color-navy` a opacidad muy baja (0.07-0.16), ubicados en los puntos de transición entre secciones (hero→acciones, acciones→SURi, SURi→autoridades, registros→contacto, contacto→footer). Es una extensión discreta del motivo del "sello" a la escala de la página completa — no reemplaza ni introduce blur, sombra o movimiento; se recortan contra el borde del `.wrap` y no requieren gating por `prefers-reduced-motion` porque no animan.
 
 ## Elevation & Depth
 
-**(Actualizado — ya no aplica "Plano por defecto").** El pivot a glassmorphism introdujo sombra y profundidad como recurso estructural, no solo de estado. Las superficies "flotantes" (tarjetas de pilares/autoridades, panel de SURi, panel de contacto) usan `--shadow-glass` / `--shadow-glass-lift` en reposo — ya no es una excepción rara, es el lenguaje del sitio. El hover-lift de autoridades y el sello de contacto se mantienen sin cambios.
+Plano por defecto. El sitio no usa sombra como recurso decorativo — aparece únicamente como respuesta a estado (hover) o para un elemento verdaderamente flotante (el sello de contacto). No hay glassmorphism ni `backdrop-filter` en ninguna superficie.
 
 ### Shadow Vocabulary
-- **Sello flotante** (`var(--shadow-seal)`): el badge circular de "Contacto con AEDA" y los avatares que rompen el borde de sus tarjetas.
-- **Glass** (`var(--shadow-glass)` / `var(--shadow-glass-lift)`): todas las superficies de vidrio (tarjetas, paneles) en reposo.
-- **Hover-lift** (`box-shadow: 0 16px 32px -14px rgba(15, 23, 42, 0.28)`): sin cambios, se mantiene sobre el hover-lift existente.
+- **Sello flotante** (`box-shadow: 0 6px 20px -8px rgba(15, 23, 42, 0.18)`): el badge circular de "Contacto con AEDA" — el único elemento que tiene sombra en reposo, porque es literalmente un objeto que se posa sobre la página.
+- **Hover-lift** (`box-shadow: 0 16px 32px -14px rgba(15, 23, 42, 0.28)`): tarjetas de autoridades al pasar el mouse/foco — combinado con `translateY(-5px) scale(1.012)`.
 
 ### Named Rules
-**La Regla Plano-Por-Defecto queda derogada por el pivot orgánico (2026-08-27).** La sombra ahora es parte del lenguaje de superficie (glass), no solo respuesta a interacción. Se mantiene, eso sí, la disciplina de no usar sombras puramente decorativas sin una superficie de vidrio real detrás.
+**La Regla Plano-Por-Defecto.** Ninguna superficie tiene sombra en reposo salvo el sello de contacto. La sombra es siempre una respuesta a interacción, nunca un adorno permanente.
 
 ## Shapes
 
-**(Actualizado)** Tres escalas de radio conviviendo con una regla documentada (no es un radio único, pero cada uno tiene un rol fijo):
-- **Círculo** (`border-radius: 50%`): reservado para fotos y marcas, sin cambios respecto al criterio original.
-- **`--radius-lg` (24px):** tarjetas y paneles de vidrio (pilares, autoridades, SURi, contacto).
-- **`--radius-md` (14px):** inputs de formulario.
-- **`--radius-pill` (999px):** botones y CTA (antes 3px) — el pill ahora es el default de botón, no la excepción del nav.
+Dos lenguajes de forma conviviendo a propósito: todo lo rectangular (botones, inputs, tarjetas, badges de registro) usa un radio chico y consistente de 3-4px — nunca `rounded-lg` genérico ni pill fuera del CTA de nav. Todo lo que sea retrato o marca (fotos de autoridades, íconos de pilares, isologo del hero/contacto) es un círculo perfecto (`border-radius: 50%`). No hay una forma intermedia; el círculo está reservado para "esto es una persona, una marca, o un acento de fondo", el radio chico para "esto es un control o contenedor".
 
 ## Components
 
 ### Buttons
-- **Shape:** `--radius-pill` (999px) en todos los botones (primary, outline-on-navy, submit, nav CTA) — ya no hay radio chico de 3px en botones.
-- **Primary (sobre fondo claro):** fondo `--color-brand`, texto blanco, hover a `--color-brand-dark`.
+- **Shape:** radio de 3px, nunca completamente cuadrado ni pill (excepto el CTA "Contacto" del nav, que sí es un pill funcional por convención de nav — ver nota abajo sobre su radio real).
+- **Primary (texto blanco sobre acento):** fondo `--color-brand-dark` en reposo, hover a `--color-navy` (ver Corrección de contraste — no usar `--color-brand` como fondo de texto blanco).
 - **Outline sobre navy:** fondo `--color-bg` (papel), texto navy, hover invierte a fondo transparente + texto papel — usado para "Conocé más sobre SURi" sobre el navy.
 - **Hover / Focus:** el ícono de flecha del botón se desplaza `translateX(3px)` en 0.2s, gateado detrás de `prefers-reduced-motion: no-preference`.
 
-### Cards / Containers (glassmorphism)
-- **Corner Style:** `--radius-lg` (24px) en todas las tarjetas y paneles.
-- **Background:** `--glass-light-bg` (blanco 66% + `backdrop-filter: blur(20px)`) sobre fondo claro, `--glass-navy-bg` sobre el navy de SURi.
-- **Shadow Strategy:** `--shadow-glass` en reposo (ver Elevation).
-- **Overlap:** las fotos/avatares y el sello de contacto rompen deliberadamente el borde superior de su tarjeta (`position: absolute` + offset negativo) — es el gesto de "objeto que se posa sobre la superficie", ahora extendido de "solo el sello" a todo retrato en tarjeta.
-- **Fallback:** bajo `prefers-reduced-transparency: reduce`, el vidrio cae a fondo sólido sin blur (ver `:root` y cada bloque `.pilar-card`/`.autoridad`/`.contacto-panel`/`.suri-panel`).
-- **Internal Padding:** 26-44px según componente.
+### Corrección de contraste (heredada, 2026-08-27)
+Los botones de texto blanco sobre `--color-brand` (CTA "Contacto" del nav, submit del formulario) medían 4.42:1 — por debajo del mínimo AA de 4.5:1 para texto normal. Se corrigieron a `--color-brand-dark` en reposo y `--color-navy` en hover (7.26:1). Esta corrección se hizo originalmente durante el pivot orgánico pero es independiente de esa estética, así que se conservó al revertir a la dirección plana.
+
+### Cards / Containers
+- **Corner Style:** 4px de radio (autoridades) o sin borde (pilares, que usan solo la foto circular + texto).
+- **Background:** blanco/papel, borde de 1px `--color-border`.
+- **Shadow Strategy:** ninguna en reposo; ver Elevation para el hover-lift de autoridades.
+- **Internal Padding:** 26px.
 
 ### Inputs / Fields
-- **Style:** fondo blanco, borde 1px `--color-input-border`, radio `--radius-md` (14px, antes 3px), padding 13-16px.
+- **Style:** fondo blanco, borde 1px `--color-input-border`, radio 3px, padding 13-14px.
 - **Focus:** contorno de 2px en `--color-brand` con 2px de offset (mismo tratamiento que los links).
 - **Error / Disabled:** no hay estado de error por campo individual; el formulario reporta éxito/error a nivel de envío completo (`.form-status`, verde `--color-success` / rojo `--color-error`).
 
 ### Navigation
-- Header sticky con fondo de vidrio (`--glass-light-bg` + `backdrop-filter: blur(20px)`), sin borde inferior duro (reemplazado por una sombra suave). Links en Lato 600, 14.5px. El CTA "Contacto" es un pill de color (antes radio 3px). En mobile (`≤900px`) el nav de texto desaparece y un botón hamburguesa (44×44px, dentro del mismo header sticky) despliega un panel vertical con los mismos 5 links a ancho completo, con las esquinas inferiores redondeadas — nunca un menú separado ni un overlay aparte.
+- Header sticky, fondo papel, borde inferior de 1px. Links en Lato 600, 14.5px. El CTA "Contacto" es la única pill de color del nav. En mobile (`≤900px`) el nav de texto desaparece y un botón hamburguesa (44×44px, dentro del mismo header sticky) despliega un panel vertical con los mismos 5 links a ancho completo — nunca un menú separado ni un overlay aparte.
 
-### Section Dividers (`.wave-divider`)
-Curva SVG de ancho completo entre secciones de distinto color de fondo (hero→acciones, acciones→SURi, SURi→autoridades, registros→contacto, contacto→footer). El `fill` del path siempre coincide con el color de la sección que sigue. Reemplaza el corte recto de 90° que tenía el sitio original.
-
-### Organic Blobs (`.blob`, `.suri::before/::after`, `.contacto::before`)
-Círculos `filter: blur(60-80px)`, opacidad 0.16-0.32, en tonos de la rampa de marca/navy ya definida en `.impeccable/design.json`. Animación `blob-float` (traslación + escala sutil, 22-32s, `ease-in-out infinite alternate`) gateada por `prefers-reduced-motion: no-preference`; ocultos bajo `prefers-reduced-transparency: reduce`. Sirven para conectar visualmente secciones del mismo tono (acciones/autoridades/registros) y para dar profundidad a los bloques navy (SURi) y beige (contacto).
+### Skip link (agregado 2026-08-27)
+Link "Saltar al contenido" oculto fuera de pantalla (`left: -9999px`), visible al recibir foco (`left: 16px; top: 16px`), fondo `--color-brand`, texto blanco. Primer elemento enfocable después del header, apunta a `#main-content` (el `<main>` ahora lleva ese `id`).
 
 ### El Sello Circular (componente de firma)
-El mismo patrón —un círculo con foto o logo dentro— se repite en cinco lugares del sitio: el isologo del header (46px), el isologo blanco del hero (56px de alto), las fotos de pilares (96px, ahora rompiendo el borde superior de su tarjeta) y autoridades (108px, ídem — ver "Grilla de equipo" abajo), y el sello blanco con sombra de la sección de contacto (108px, ahora también rompiendo el borde del panel de vidrio). Con el pivot orgánico este gesto de "romper el borde" pasó de ser exclusivo del sello de contacto a ser el tratamiento estándar de todo retrato/marca en tarjeta.
-
-### Grilla de equipo (Autoridades)
-`.autoridades-grid` usa `repeat(auto-fit, minmax(220px, 260px))` en vez de un grid fijo de 2 columnas — con los 2 integrantes actuales deja espacio asimétrico a la derecha a propósito; si se suma un tercer o cuarto integrante, la grilla reflowea sola sin tocar CSS. Cada tarjeta es vertical y centrada: foto circular de 108px rompiendo el borde superior, nombre, rol, y el link de LinkedIn como pill (antes texto plano) para que se lea como tarjeta de equipo, no como fila de datos.
-
-### Hero blobs y sección "Colabora"
-El hero ahora tiene 2 `.hero-blob` (mismo lenguaje que `.blob`, z-index entre el video y el degradado oscuro) para que la apertura del sitio ya sea orgánica y no dependa solo del wave-divider de cierre. Se agregó una sección nueva, `#colabora`, entre Registros y Contacto: un panel de vidrio alineado a la derecha (asimetría deliberada, en espejo con el panel de SURi que va a la izquierda) sobre dos blobs propios, con un único CTA ("Quiero colaborar" → `#contacto`) — sin eyebrow, porque ya se llegó al máximo de 3 eyebrows permitidos en el resto del sitio.
-
-### Corrección de contraste (2026-08-27)
-Los botones de texto blanco sobre `--color-brand` (nav CTA, submit del formulario, y por herencia el nuevo botón de "Colabora") medían 4.42:1 — por debajo del mínimo AA de 4.5:1 para texto normal. Se corrigieron a `--color-brand-dark` en reposo y `--color-navy` en hover (7.26:1), sin agregar ningún color nuevo al sistema.
+El mismo patrón —un círculo con foto, logo o color plano dentro— se repite en el sitio: el isologo del header (46px), el isologo blanco del hero (56px de alto), las fotos de pilares y autoridades (140px / 58px), el sello blanco con sombra de la sección de contacto (108px, el único con `box-shadow` en reposo), y ahora también los cinco acentos circulares de fondo entre secciones (ver Layout). Es el elemento que más unifica visualmente el sitio de punta a punta.
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** usar `var(--color-*)` para cualquier color nuevo — nunca un hex literal nuevo sin agregarlo primero al `:root`.
-- **Do** mantener el círculo (`border-radius: 50%`) reservado para fotos y marcas; `--radius-lg` para tarjetas/paneles, `--radius-md` para inputs, `--radius-pill` para botones.
-- **Do** gatear cualquier animación/transición nueva (incluidos los `.blob`) detrás de `@media (prefers-reduced-motion: no-preference)`, siguiendo el patrón ya establecido.
-- **Do** proveer fallback sólido sin blur bajo `prefers-reduced-transparency: reduce` para cualquier superficie de vidrio nueva.
+- **Do** mantener el círculo (`border-radius: 50%`) reservado para fotos, marcas y acentos de fondo; el radio de 3px para todo lo demás.
+- **Do** gatear cualquier animación/transición nueva detrás de `@media (prefers-reduced-motion: no-preference)`, siguiendo el patrón ya establecido para scroll-reveal, hover-lift y el ícono del botón de SURi.
 - **Do** mantener Libre Baskerville exclusivamente en títulos; el cuerpo siempre en Lato.
+- **Do** usar `--color-brand-dark` (nunca `--color-brand`) como fondo de botones con texto blanco, por contraste AA.
 
 ### Don't:
+- **Don't** agregar una sombra decorativa a un elemento en reposo — la Regla Plano-Por-Defecto solo tiene dos excepciones y ya están documentadas.
 - **Don't** introducir una tercera familia tipográfica (ni siquiera para un detalle chico como un label o un mono de datos).
 - **Don't** usar el azul de marca en más de un elemento interactivo por vista — diluye la Regla del Acento Único.
 - **Don't** cargar el video del hero fuera de la condición actual (desktop + sin `prefers-reduced-motion`) — es una decisión de accesibilidad y performance, no un descuido.
-- **Don't** volver a un corte recto de 90° entre secciones de distinto fondo — usar `.wave-divider`.
-- **Don't** mezclar radios fuera de la escala documentada (círculo / 24px / 14px / pill).
+- **Don't** reintroducir glassmorphism, blobs difuminados/animados o curvas SVG entre secciones — fueron probados y revertidos el 2026-08-27; si se reconsidera esa dirección, debe ser una decisión explícita y nueva, no un drift incremental.
